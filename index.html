@@ -1,1 +1,72 @@
-<a href="http://steven.codes">Click here to continue to steven.codes, Steven's new website.</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crossword Editor</title>
+  <link rel="stylesheet" href="master.css">
+  <script src="jquery-3.2.1.min.js"></script>
+  <script src="fittext.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+</head>
+<body>
+  <div id="header" class="center">
+    <h1>The Daily Mini</h1>
+    <p>Custom edition ⚬ by Kim Traversi</p>
+  </div>
+  <div id="toolbar" class="center">
+    <div>
+      Tools:
+      <button id="black-button" disabled>Make black square</button>
+    </div>
+    <div>
+      <button id="play-button">Play</button>
+      <button id="share-button">Share</button>
+    </div>
+  </div>
+  <div id="timer-area" class="center">
+    <div id="timer">00:00</div>
+  </div>
+  <div id="body" class="center">
+    <div id="crossword-grid-box">
+      <div id="crossword-container">
+        <div id="the-crossword">
+        </div>
+      </div>
+    </div>
+    <div id="clues-container">
+      <div>
+        <h4>ACROSS</h4>
+        <div id="clues-across"></div>
+      </div>
+      <div>
+        <h4>DOWN</h4>
+        <div id="clues-down"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer" class="center">
+    <p>Merry Christmas 2017, Mom! Made with ❤️ by Steven.</p>
+  </div>
+
+  <div id="play-modal" class="modal" style="display:hidden;">
+    <p>Press play to try out your crossword.</p>
+    <button id="confirm-play-button">Play</button>
+  </div>
+
+  <div id="you-win-modal" class="modal" style="display:hidden;">
+    <p>Congrats, you got it!</p>
+    <button id="confirm-win-button">Ok!</button>
+  </div>
+
+  <div id="share-modal" class="modal" style="display:hidden;">
+    <p>Send this link to share your puzzle!</p>
+    <p><input id="share-link" readonly></p>
+    <button id="copy-share-link-button">Copy link</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

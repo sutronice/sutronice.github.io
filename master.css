@@ -1,0 +1,197 @@
+* { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+
+.center {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+#header {
+  padding: 20px;
+}
+#header h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+#header p {
+  margin-bottom: 0px;
+}
+
+#toolbar {
+  padding: 10px;
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#toolbar div:nth-child(2) {
+  text-align: right;
+}
+
+#timer-area {
+  text-align: center;
+  padding: 10px;
+}
+#timer-area #timer {
+  display: inline-block;
+  font-size: 20px;
+}
+
+#body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#crossword-grid-box {
+
+}
+
+#crossword-container {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+
+#the-crossword {
+  /*background: orange;*/
+  border: 1px solid black;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.row {
+  border: none;
+}
+.cell {
+  display: inline-block;
+  position: relative;
+  border: 1px solid black;
+}
+.cell-select {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 4px solid #4083fb;
+}
+.cell-black {
+  background: black;
+}
+.cell-char {
+  text-align: center;
+  padding-top: 10%;
+
+  pointer-events:none;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: none;
+}
+.cell-num {
+  text-align: center;
+  pointer-events:none;
+
+  position: absolute;
+  width: 33%;
+  height: 33%;
+  left: 0;
+  right: 0;
+  border: none;
+}
+
+#clues-container {
+  padding: 20px;
+}
+
+#clues-container h4  {
+  margin-bottom: 10px;
+}
+
+#clues-container ul {
+  padding-left: 0px;
+  list-style-type: none;
+}
+
+#clues-container li {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+#clues-container li .clue-num {
+  font-weight: 700;
+}
+#clues-container li .editable-clue {
+  cursor: text;
+}
+#clues-container li .editable-clue input {
+  font-size: 16px;
+}
+
+#clues-across {
+
+}
+
+#clues-down {
+
+}
+
+#share-link {
+  width: 100%;
+  font-size: 16px;
+}
+
+#footer {
+  text-align: center;
+}
+
+div {
+  /*border: 1px solid black;*/
+  box-sizing: border-box;
+}
+
+button {
+  background-color:#4f85e5;
+  border:none;
+  color: white;
+  border-bottom: 3px solid #285fd6;
+  border-radius:3px; font-family:'PT Sans',sans-serif;
+  font-size:18px;
+  padding:10px;
+  font-weight:bold;
+  margin:0px 0px 0px 5px;
+  vertical-align:middle;
+  display:inline-block;
+}
+button:disabled {
+  background-color:#E0E0E0;
+  border-bottom: 3px solid #BDBDBD;
+  color: #616161;
+}
+button:disabled:hover {
+  border-bottom-width:3px;
+  margin-top:0px;
+  cursor: not-allowed;
+}
+button:disabled:hover:active {
+  border-bottom-width:3px;
+  margin-top:0px;
+}
+button:hover:active {
+  border-bottom-width:0;
+  margin-top:3px;
+}
+button:hover {
+  border-bottom-width:2px;
+  margin-top:1px;
+  cursor:pointer;
+}
