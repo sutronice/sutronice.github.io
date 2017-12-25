@@ -5,15 +5,19 @@ blackButtonEl = "#black-button";
 playButtonEl = "#play-button";
 
 timerEl = "#timer";
+toolbarEl = "#toolbar";
+editorToolsEl = "#editor-tools";
 
 playModalEl = "#play-modal";
-confirmPlayButtonEl = "#confirm-play-button";
+confirmPlayButtonEl = ".confirm-play-button";
 youWinModalEl = "#you-win-modal";
 confirmWinButtonEl = "#confirm-win-button";
 shareButtonEl = "#share-button";
 shareModalEl = "#share-modal";
 shareLinkEl = "#share-link";
 copyShareLinkButtonEl = "#copy-share-link-button";
+
+playOthersModalEl = "#play-others-modal";
 
 SIZE = 5;
 
@@ -42,13 +46,6 @@ console.log(numbers);
 ACROSS = 0;
 DOWN = 1;
 clues = [{}, {}];
-
-var urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has('game')) {
-  var encodedGame = urlParams.get('game');
-  var decodedGame = decodeURIComponent(window.atob(encodedGame));
-  eval(decodedGame);
-}
 
 /* Cell numbering */
 function leftEdge(r, c) {
@@ -139,6 +136,7 @@ function updateCells() {
 function editableDiv(initialValue, dir, num) {
   var $li = $("<div class='editable-clue' style='display: inline-block'>" + initialValue + "</div>");
   var clickFunc = function() {
+    if (playing) { return }
     var $textarea = $(document.createElement("input"));
     $textarea.val($(this).html());
     $(this).html($textarea);
@@ -237,6 +235,7 @@ function checkForWin() {
   }
   playing = false;
   stopTimer();
+  $(toolbarEl).css({"visibility": "visible"});
   $(youWinModalEl).modal();
 }
 /* Char entry */
@@ -312,15 +311,18 @@ $(playButtonEl).click(function() {
   $(playModalEl).modal();
 });
 
-$(confirmPlayButtonEl).click(function() {
+function startPlaying() {
   playing = true;
   targetBoard = deepCopy(board);
   board = deepClean(targetBoard, clean=BLANK);
   updateCells();
   updateClues();
+  $(toolbarEl).css({"visibility": "hidden"});
   $.modal.close();
   startTimer(true);
-});
+}
+
+$(confirmPlayButtonEl).click(startPlaying);
 
 $(confirmWinButtonEl).click(function() {
   $.modal.close();
@@ -390,3 +392,11 @@ function stopTimer() {
   clearTimeout(t);
 }
 
+/* Loading a game */
+var urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('game')) {
+  var encodedGame = urlParams.get('game');
+  var decodedGame = decodeURIComponent(window.atob(encodedGame));
+  eval(decodedGame);
+  $(playOthersModalEl).modal();
+}

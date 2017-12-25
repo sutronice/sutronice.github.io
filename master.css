@@ -150,6 +150,16 @@
   font-size: 16px;
 }
 
+#play-modal {
+  text-align: center;
+}
+#play-others-modal {
+  text-align: center;
+}
+#you-win-modal {
+  text-align: center;
+}
+
 #footer {
   text-align: center;
 }
