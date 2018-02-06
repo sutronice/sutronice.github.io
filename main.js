@@ -345,14 +345,28 @@ function makeGameURL() {
     param;
   return newUrl;
 }
+function tinyURLify(longURL) {
+  console.log("hoopaala");
+  $.ajax({
+    url: "https://api.steven.codes/shorten_url",
+    method: "POST",
+    data: {'long_url': longURL},
+  }).done(function(shortURL){
+    $(shareLinkEl).val(shortURL);
+    $(shareLinkEl).focus();
+    $(shareLinkEl).select();
+  });
+}
+function displayGameURL() {
+  tinyURLify(makeGameURL());
+}
 
 /* Share game */
 
 $(shareButtonEl).click(function() {
-  $(shareLinkEl).val(makeGameURL());
   $(shareModalEl).modal();
-  $(shareLinkEl).focus();
-  $(shareLinkEl).select();
+  $(shareLinkEl).val("loading URL...");
+  displayGameURL();
 });
 
 $(copyShareLinkButtonEl).click(function() {
