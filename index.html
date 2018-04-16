@@ -6,23 +6,31 @@
   <link rel="stylesheet" href="master.css">
   <script src="jquery-3.2.1.min.js"></script>
   <script src="fittext.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+  <script src="jquery.modal.min.js"></script>
+  <!-- <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet"> -->
+  <link rel="stylesheet" href="jquery.modal.min.css" />
 </head>
 <body>
   <div id="header" class="center">
-    <h1>The Daily Mini</h1>
-    <p>Custom edition ⚬ by Kim Traversi</p>
+    <h1><span id="author-name">Kim</span>'s Daily Mini</h1>
+    <p></p>
   </div>
-  <div id="toolbar" class="center">
+  <div id="editor-toolbar" class="center toolbar">
     <div id="editor-tools">
       Tools:
       <button id="black-button" disabled>Make black square</button>
+      <button id="example-button">Build example</button>
     </div>
     <div>
       <button id="play-button">Play</button>
       <button id="share-button">Share</button>
+    </div>
+  </div>
+  <div id="player-toolbar" class="center toolbar">
+    <div>
+    </div>
+    <div>
+      <button id="give-up-button">Give Up</button>
     </div>
   </div>
   <div id="timer-area" class="center">
@@ -48,7 +56,7 @@
   </div>
 
   <div id="footer" class="center">
-    <p>Merry Christmas 2017, Mom! Made with ❤️ by Steven.</p>
+    <p>footer</p>
   </div>
 
   <div id="play-modal" class="modal" style="display:hidden;">
@@ -61,16 +69,22 @@
   </div>
 
   <div id="you-win-modal" class="modal" style="display:hidden;">
-    <p>Congrats, you got it!</p>
-    <button id="confirm-win-button">Ok!</button>
+    <p>Congrats, you got it in <span id="you-win-modal-time"></span>!</p>
+    <a rel="modal:close"><button>Go to Editor</button></a>
   </div>
 
   <div id="share-modal" class="modal" style="display:hidden;">
     <p>Send this link to share your puzzle!</p>
-    <p><input id="share-link" readonly></p>
-    <button id="copy-share-link-button">Copy link</button>
+    <p><input id="share-modal-link" readonly></p>
+    <button id="share-modal-copy-button">Copy link</button>
   </div>
 
-  <script src="main.js"></script>
+  <div id="author-modal" class="modal" style="display:hidden;">
+    <p>What's your first name? This will change the author for sharing the puzzle.</p>
+    <p><input id="author-modal-input"></p>
+    <button id="author-modal-done-button">Done</button>
+  </div>
+
+  <script src="bundle.js"></script>
 </body>
 </html>
