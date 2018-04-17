@@ -797,6 +797,7 @@ function CrosswordView(controller, loadingGame) {
   this.shareModalCopyButton = "#share-modal-copy-button";
   this.playFromUrlModal = "#play-from-url-modal";
   this.playFromUrlModalConfirmButton = "#play-from-url-modal-confirm-button";
+  this.playFromUrlModalAuthor = "#play-from-url-modal-author";
 
   this.timerEl = "#timer";
   this.playerToolbarEl = "#player-toolbar";
@@ -810,6 +811,12 @@ function CrosswordView(controller, loadingGame) {
   this.editedClue = undefined;
 
   if (loadingGame) {
+    var self = this;
+    $(this.playFromUrlModal).on($.modal.BEFORE_OPEN, function(event, modal) {
+      console.log(self.controller.authorName);
+      $(self.playFromUrlModalAuthor).text(self.controller.authorName);
+    });
+
     $("#body").addClass("blur");
     $(this.playFromUrlModal).modal();
   }
@@ -915,9 +922,11 @@ CrosswordView.prototype._setup_handlers = function () {
 
     if (code == 8) { // delete
       if ($.modal.isActive()) { return; }
-      self.controller.deleteChar();
-      self._redrawCells();
-      return false; // prevent browser back
+      if (!self._editingClue()) { // allow focused inputs to delete
+        self.controller.deleteChar();
+        self._redrawCells();
+        return false; // prevent browser back
+      }
     }
     if (!self._editingClue()) {
       if ($.modal.isActive()) { return; }

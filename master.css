@@ -56,8 +56,8 @@ body {
 }
 
 .blur {
-  -webkit-filter: blur(20px); /* Chrome, Opera, etc. */
-  filter: blur(20px); /* Firefox 35+, eventually all */
+  -webkit-filter: blur(20px);
+  filter: blur(20px);
 }
 
 #crossword-grid-box {
