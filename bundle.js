@@ -14,7 +14,6 @@ Timer = require('../models/Timer.js');
 function CrosswordController() {
   this.size = 5;
 
-  // XXX: It works! Improve it
   if (this._loadingGame()) {
     var crossword = this._loadCrossword();
     this.board = new Board(this.size, crossword.board);
@@ -40,7 +39,7 @@ function CrosswordController() {
 
   this.urlBuilderService = new UrlBuilderService(this);
 
-  this.view = new CrosswordView(this);
+  this.view = new CrosswordView(this, this._loadingGame());
 }
 
 /*
@@ -776,7 +775,7 @@ ClueView = require('./ClueView.js');
 
 Const = require('../global/Const.js');
 
-function CrosswordView(controller) {
+function CrosswordView(controller, loadingGame) {
   this.controller = controller;
 
   this.crosswordContainer = "#crossword-container";
@@ -796,6 +795,8 @@ function CrosswordView(controller) {
   this.shareModal = "#share-modal";
   this.shareModalLink = "#share-modal-link";
   this.shareModalCopyButton = "#share-modal-copy-button";
+  this.playFromUrlModal = "#play-from-url-modal";
+  this.playFromUrlModalConfirmButton = "#play-from-url-modal-confirm-button";
 
   this.timerEl = "#timer";
   this.playerToolbarEl = "#player-toolbar";
@@ -808,6 +809,10 @@ function CrosswordView(controller) {
 
   this.editedClue = undefined;
 
+  if (loadingGame) {
+    $("#body").addClass("blur");
+    $(this.playFromUrlModal).modal();
+  }
   this._construct();
 }
 
@@ -990,6 +995,13 @@ CrosswordView.prototype._setup_handlers = function () {
   $(this.authorModal).on($.modal.OPEN, function(event, modal) {
     $(self.authorModalInput).focus();
     $(self.authorModalInput).select();
+  });
+
+  $(this.playFromUrlModal).on($.modal.AFTER_CLOSE, function(event, modal) {
+    self.controller.startPlaying();
+    self._toolsEnableCheck();
+    self._redrawCells();
+    $("#body").removeClass("blur");
   });
 }
 

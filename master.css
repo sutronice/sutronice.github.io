@@ -1,5 +1,9 @@
 * { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
 
+body {
+  min-width: 800px;
+}
+
 .center {
   position: relative;
   margin: 0 auto;
@@ -49,6 +53,11 @@
 #body {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.blur {
+  -webkit-filter: blur(20px); /* Chrome, Opera, etc. */
+  filter: blur(20px); /* Firefox 35+, eventually all */
 }
 
 #crossword-grid-box {
@@ -152,16 +161,12 @@
   font-weight: 700;
 }
 .clue input {
-  font-size: 16px;
+  font-size: 18px;
   width: 75%;
 }
 
-#clues-across {
-
-}
-
-#clues-down {
-
+#clues-across, #clues-down {
+  font-size: 18px;
 }
 
 .clue-select {
