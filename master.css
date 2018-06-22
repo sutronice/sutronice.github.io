@@ -30,6 +30,12 @@ body {
   cursor: pointer;
 }
 
+#editor-toolbar {
+  border: 0.5px solid #777;
+  border-left: none;
+  border-right: none;
+}
+
 .toolbar {
   padding: 10px;
   padding-left: 20px;
@@ -72,7 +78,7 @@ body {
 
 #the-crossword {
   /*background: orange;*/
-  border: 1px solid black;
+  border: 2px solid black;
 
   position: absolute;
   top: 0;
@@ -80,6 +86,8 @@ body {
   bottom: 0;
   right: 0;
   margin: 10px;
+
+  box-sizing: content-box;
 }
 
 .row {
@@ -88,7 +96,9 @@ body {
 .cell {
   display: inline-block;
   position: relative;
-  border: 1px solid black;
+  border: 0.5px solid #777;
+
+  box-sizing: border-box;
 }
 .cell-select {
   position: absolute;
@@ -139,6 +149,7 @@ body {
 }
 
 #clues-container h4  {
+  font-size: 19px;
   margin-bottom: 10px;
 }
 
@@ -188,6 +199,18 @@ body {
   text-align: center;
 }
 
+.modal input {
+  padding: 8px 12px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.modal input:focus {
+  border-color: #baddf9;
+  border-width: 3px;
+  padding: 6px 10px; /* don't change size of box */
+}
+
 #footer {
   text-align: center;
 }
@@ -202,7 +225,8 @@ button {
   border:none;
   color: white;
   border-bottom: 3px solid #285fd6;
-  border-radius:3px; font-family:'PT Sans',sans-serif;
+  border-radius:3px;
+  /* font-family:'PT Sans',sans-serif; */
   font-size:18px;
   padding:10px;
   font-weight:bold;
@@ -232,4 +256,19 @@ button:hover {
   border-bottom-width:2px;
   margin-top:1px;
   cursor:pointer;
+}
+
+#share-modal-loader {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #333; /* Dark grey */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+
+    margin: 24px 24px 12px 24px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

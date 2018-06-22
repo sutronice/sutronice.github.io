@@ -71,8 +71,11 @@
 
   <div id="share-modal" class="modal" style="display:hidden;">
     <p>Send this link to share your puzzle!</p>
-    <p><input id="share-modal-link" readonly></p>
-    <button id="share-modal-copy-button">Copy link</button>
+    <div id="share-modal-loader"></div>
+    <div id="share-modal-loaded-items">
+      <p><input id="share-modal-link" readonly></p>
+      <button id="share-modal-copy-button">Copy link</button>
+    </div>
   </div>
 
   <div id="author-modal" class="modal" style="display:hidden;">

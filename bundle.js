@@ -302,7 +302,7 @@ CrosswordController.prototype.fillExamplePuzzle = function () {
 }
 
 module.exports = CrosswordController;
-},{"../global/Const.js":2,"../models/Board.js":5,"../models/Clues.js":7,"../models/Timer.js":8,"../services/NextCellService.js":9,"../services/UrlBuilderService.js":10,"../views/CrosswordView.js":13}],2:[function(require,module,exports){
+},{"../global/Const.js":2,"../models/Board.js":4,"../models/Clues.js":6,"../models/Timer.js":7,"../services/NextCellService.js":8,"../services/UrlBuilderService.js":9,"../views/CrosswordView.js":12}],2:[function(require,module,exports){
 var Const = {
   BLACK: "BLACK",
   BLANK: "",
@@ -313,8 +313,6 @@ var Const = {
 
 module.exports = Const;
 },{}],3:[function(require,module,exports){
-arguments[4][2][0].apply(exports,arguments)
-},{"dup":2}],4:[function(require,module,exports){
 // Interface = require('./crossword/interface.js');
 //
 // interface = new Interface();
@@ -322,7 +320,7 @@ arguments[4][2][0].apply(exports,arguments)
 CrosswordController = require('./controllers/CrosswordController.js');
 
 controller = new CrosswordController();
-},{"./controllers/CrosswordController.js":1}],5:[function(require,module,exports){
+},{"./controllers/CrosswordController.js":1}],4:[function(require,module,exports){
 Cell = require('./Cell.js');
 
 function Board(size, initial=undefined) {
@@ -418,7 +416,7 @@ Board.equals = function(board, targetBoard) {
 }
 
 module.exports = Board;
-},{"./Cell.js":6}],6:[function(require,module,exports){
+},{"./Cell.js":5}],5:[function(require,module,exports){
 Const = require('../global/Const.js');
 
 function Cell(r, c, char="", number=0) {
@@ -446,8 +444,8 @@ Cell.equals = function(cellA, cellB) {
 }
 
 module.exports = Cell;
-},{"../global/Const.js":2}],7:[function(require,module,exports){
-Const = require('../global/const.js');
+},{"../global/Const.js":2}],6:[function(require,module,exports){
+Const = require('../global/Const.js');
 
 function Clues(initial=undefined) {
   // brackets for computed property id
@@ -475,7 +473,7 @@ Clues.prototype.raw = function() {
 }
 
 module.exports = Clues;
-},{"../global/const.js":3}],8:[function(require,module,exports){
+},{"../global/Const.js":2}],7:[function(require,module,exports){
 function Timer(tick) {
   this.t;
   this.seconds = 0;
@@ -507,7 +505,7 @@ Timer.prototype._add = function () {
 }
 
 module.exports = Timer;
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 Const = require('../global/Const.js');
 
 function NextCellService(controller) {
@@ -585,7 +583,7 @@ NextCellService.prototype._size = function () {
 }
 
 module.exports = NextCellService;
-},{"../global/Const.js":2}],10:[function(require,module,exports){
+},{"../global/Const.js":2}],9:[function(require,module,exports){
 /* Example usage:
 
   myUrlBuilderService.url(function(shortURL) {
@@ -639,7 +637,7 @@ UrlBuilderService.prototype._gameToParameter = function() {
 }
 
 module.exports = UrlBuilderService;
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 function CellView(r, c, char, number) {
   this.r = r;
   this.c = c;
@@ -716,7 +714,7 @@ CellView.prototype._removeBlack = function() {
 }
 
 module.exports = CellView;
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 function ClueView(dir, num, text) {
   this.dir = dir;
   this.num = num;
@@ -769,7 +767,7 @@ ClueView.deselectAll = function () {
 }
 
 module.exports = ClueView;
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 CellView = require('./CellView.js');
 ClueView = require('./ClueView.js');
 
@@ -795,6 +793,8 @@ function CrosswordView(controller, loadingGame) {
   this.shareModal = "#share-modal";
   this.shareModalLink = "#share-modal-link";
   this.shareModalCopyButton = "#share-modal-copy-button";
+  this.shareModalLoader = "#share-modal-loader";
+  this.shareModalLoadedItems = "#share-modal-loaded-items";
   this.playFromUrlModal = "#play-from-url-modal";
   this.playFromUrlModalConfirmButton = "#play-from-url-modal-confirm-button";
   this.playFromUrlModalAuthor = "#play-from-url-modal-author";
@@ -916,6 +916,7 @@ CrosswordView.prototype._setup_handlers = function () {
       } else {
         self.controller.selectNextClue();
         self._redrawCells();
+        self._drawSelectedClue();
       }
       return;
     }
@@ -989,8 +990,11 @@ CrosswordView.prototype._setup_handlers = function () {
   });
 
   $(this.shareModal).on($.modal.BEFORE_OPEN, function(event, modal) {
-    $(self.shareModalLink).val("loading...");
+    $(self.shareModalLoader).show();
+    $(self.shareModalLoadedItems).hide();
     self.controller.getShareUrl(function(url) {
+      $(self.shareModalLoader).hide();
+      $(self.shareModalLoadedItems).show();
       $(self.shareModalLink).val(url);
       $(self.shareModalLink).focus();
       $(self.shareModalLink).select();
@@ -1126,4 +1130,4 @@ CrosswordView.prototype.win = function() {
 }
 
 module.exports = CrosswordView;
-},{"../global/Const.js":2,"./CellView.js":11,"./ClueView.js":12}]},{},[4]);
+},{"../global/Const.js":2,"./CellView.js":10,"./ClueView.js":11}]},{},[3]);
