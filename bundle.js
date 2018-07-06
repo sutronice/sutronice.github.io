@@ -51,12 +51,12 @@ CrosswordController.prototype.enterChar = function (char) {
   if (this.selectedCell.isBlack()) { return; }
   if (char.match(/^[a-zA-Z]{1}$/)) {
     this.selectedCell.char = char.toUpperCase();
+    this.selectNextCell();
   }
   if (this.playing && this._didWin()) {
     this._doWin();
     return;
   }
-  this.selectNextCell();
 };
 
 CrosswordController.prototype.deleteChar = function () {
@@ -140,6 +140,9 @@ CrosswordController.prototype.startPlaying = function () {
   this.board.clearCharacters();
   this.view.updateTimer(0, 0);
   this.timer.start(reset=true);
+  if (this.playing && this._didWin()) {
+    this._doWin();
+  }
 }
 
 CrosswordController.prototype.stopPlaying = function () {
