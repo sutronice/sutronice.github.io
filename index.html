@@ -19,7 +19,8 @@
     <div id="editor-tools">
       Tools:
       <button id="black-button" disabled>Make black square</button>
-      <button id="example-button">Build example</button>
+      <button id="example-button" style="display:none;">Build example</button>
+      <button id="clear-button">Clear</button>
     </div>
     <div>
       <button id="play-button">Play</button>
@@ -87,6 +88,11 @@
   <div id="play-from-url-modal" class="modal" style="display:hidden;">
     <p>You're about to play a crossword that <span id="play-from-url-modal-author"></span> created.<br><br>Click Go to start!</p>
     <a rel="modal:close"><button>Go!</button></a>
+  </div>
+
+  <div id="clear-modal" class="modal" style="display:hidden;">
+    <p>Would you like to clear your puzzle and start from scratch?</p>
+    <a rel="modal:close"><button id="clear-modal-button">Do it</button></a>
   </div>
 
   <script src="bundle.js"></script>

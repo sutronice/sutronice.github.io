@@ -150,6 +150,11 @@ CrosswordController.prototype.stopPlaying = function () {
   this.timer.stop();
 }
 
+CrosswordController.prototype.clearBoard = function () {
+  this.board = new Board(this.size);
+  this.clues = new Clues();
+  this.numberify();
+}
 
 /*
  * View helpers
@@ -789,6 +794,9 @@ function CrosswordView(controller, loadingGame) {
   this.playButton = "#play-button";
   this.shareButton = "#share-button";
   this.exampleButton = "#example-button";
+  this.clearButton = "#clear-button";
+  this.clearModal = "#clear-modal";
+  this.clearModalButton = "#clear-modal-button";
   this.editorToolbarEl = "#editor-toolbar";
   this.shareModal = "#share-modal";
   this.shareModalLink = "#share-modal-link";
@@ -961,6 +969,10 @@ CrosswordView.prototype._setup_handlers = function () {
     self._redrawClues();
   });
 
+  $(this.clearButton).click(function() {
+    $(self.clearModal).modal();
+  });
+
   $(this.giveUpButton).click(function() {
     self.controller.stopPlaying();
     self.updateTimer(0, 0);
@@ -982,6 +994,12 @@ CrosswordView.prototype._setup_handlers = function () {
     self._updateAuthorName();
     $.modal.close();
   });
+
+  $(this.clearModalButton).click(function() {
+    self.controller.clearBoard();
+    self._redrawCells();
+    self._redrawClues();
+  })
 
   /* Modal events */
 
