@@ -55,7 +55,6 @@ CrosswordController.prototype.enterChar = function (char) {
   }
   if (this.playing && this._didWin()) {
     this._doWin();
-    return;
   }
 };
 
@@ -63,8 +62,12 @@ CrosswordController.prototype.deleteChar = function () {
   if (this.selectedCell.isBlack()) { return; }
   if (this.selectedCell.isBlank()) {
     this.selectPrevCell();
+    return;
   }
   this.selectedCell.char = "";
+  if (this.playing && this._didWin()) {
+    this._doWin();
+  }
 };
 
 CrosswordController.prototype.setClueText = function (dir, num, text) {
@@ -135,8 +138,8 @@ CrosswordController.prototype.rotateSelectedClueDirection = function() {
 
 CrosswordController.prototype.startPlaying = function () {
   this.playing = true;
-  this.targetBoard = this.board;
-  this.board = this.board.copy();
+  this.targetBoard = this.board.copy();
+  this.board = this.board;
   this.board.clearCharacters();
   this.view.updateTimer(0, 0);
   this.timer.start(reset=true);
@@ -189,6 +192,8 @@ CrosswordController.prototype.numberify = function () {
   var oldClues = this.clues;
   var newClues = new Clues();
 
+  var CLUE_FILLER = "Click to edit clue.";
+
   var cell;
   num = 1;
   for (var r = 0; r < this.size; r++) {
@@ -198,7 +203,6 @@ CrosswordController.prototype.numberify = function () {
         cell.number = 0;
         continue;
       }
-      var CLUE_FILLER = "Click to edit clue.";
       if (this.board.leftEdge(r, c) && this.board.topEdge(r, c)) {
         newClues.set(Const.ACROSS, num, oldClues.get(Const.ACROSS, num) || CLUE_FILLER);
         newClues.set(Const.DOWN, num, oldClues.get(Const.DOWN, num) || CLUE_FILLER);
@@ -245,11 +249,11 @@ CrosswordController.prototype._clueForCell = function (cell, dir) {
   var c = cell.c;
   var num;
   if (dir == Const.ACROSS) {
-    while (c > 0 && !this.board.cellAt(r, c-1).isBlack()) {
+    while (c > 0 && !this.board.cellAt(r, c - 1).isBlack()) {
       c--;
     }
   } else {
-    while (r > 0 && !this.board.cellAt(r-1, c).isBlack()) {
+    while (r > 0 && !this.board.cellAt(r - 1, c).isBlack()) {
       r--;
     }
   }
@@ -386,6 +390,7 @@ Board.prototype.findCellWithNumber = function(number) {
 }
 
 Board.prototype.clearCharacters = function() {
+  var cell;
   for (var r = 0; r < this.size; r++) {
     for (var c = 0; c < this.size; c++) {
       cell = this.cellAt(r, c);
@@ -456,10 +461,10 @@ module.exports = Cell;
 Const = require('../global/Const.js');
 
 function Clues(initial=undefined) {
-  // brackets for computed property id
   if (initial) {
     this._clues = initial;
   } else {
+    // brackets for computed property id
     this._clues = {[Const.ACROSS]: {}, [Const.DOWN]: {}};
   }
 }
